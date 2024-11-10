@@ -5,7 +5,7 @@
 
  */
 
-package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity.impl;
+package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.impl;
 
 import jakarta.persistence.*;
 import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity.Role;
