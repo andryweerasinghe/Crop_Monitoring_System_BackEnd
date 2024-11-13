@@ -7,7 +7,7 @@
 
 package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.service.impl;
 
-import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.customStatusCodes.SelectedCropErrorStatus;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.customStatusCodes.SelectedErrorStatus;
 import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.dao.CropDao;
 import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.dto.CropStatus;
 import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.dto.impl.CropDTO;
@@ -49,7 +49,7 @@ public class CropServiceImpl implements CropService {
             Crop selectedCrop = cropDao.getReferenceById(cropCode);
             return (CropStatus) mapping.toCropDTO(selectedCrop);
         } else {
-            return new SelectedCropErrorStatus(2, "Crop with code " + cropCode + " not found");
+            return new SelectedErrorStatus(2, "Crop with code " + cropCode + " not found");
         }
     }
     @Override

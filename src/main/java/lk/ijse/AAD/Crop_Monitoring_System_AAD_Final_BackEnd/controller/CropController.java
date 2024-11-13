@@ -7,7 +7,7 @@
 
 package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.controller;
 
-import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.customStatusCodes.SelectedCropErrorStatus;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.customStatusCodes.SelectedErrorStatus;
 import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.dto.CropStatus;
 import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.dto.impl.CropDTO;
 import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.exception.CropNotFoundException;
@@ -69,7 +69,7 @@ public class CropController {
     @GetMapping(value = "/{cropCode}", produces = MediaType.APPLICATION_JSON_VALUE)
     public CropStatus getSelectedCrop(@PathVariable ("cropCode") String cropCode) throws Exception {
         if (!RegexProcess.cropCodeMatcher(cropCode)) {
-            return new SelectedCropErrorStatus(1, "Crop Code Not Found");
+            return new SelectedErrorStatus(1, "Crop Code Not Found");
         }
         return cropService.getCrop(cropCode);
     }

@@ -8,7 +8,9 @@
 package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.util;
 
 import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.dto.impl.CropDTO;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.dto.impl.StaffDTO;
 import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.impl.Crop;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.impl.Staff;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,5 +29,12 @@ public class Mapping {
     public CropDTO toCropDTO(Crop crop) {return modelMapper.map(crop, CropDTO.class);}
     public List<CropDTO> asCropDTOList(List<Crop> crops) {
         return modelMapper.map(crops, new TypeToken<List<CropDTO>>() {}.getType());
+    }
+    public Staff toStaff(StaffDTO staffDTO) {
+        return modelMapper.map(staffDTO, Staff.class);
+    }
+    public StaffDTO toStaffDTO(Staff staff) {return modelMapper.map(staff, StaffDTO.class);}
+    public List<StaffDTO> asStaffDTOList(List<Staff> staffList) {
+        return modelMapper.map(staffList, new TypeToken<List<StaffDTO>>() {}.getType());
     }
 }

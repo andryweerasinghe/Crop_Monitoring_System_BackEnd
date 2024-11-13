@@ -8,6 +8,7 @@
 package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.customStatusCodes;
 
 import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.dto.CropStatus;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.dto.StaffStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class SelectedCropErrorStatus implements CropStatus {
+public class SelectedErrorStatus implements CropStatus, StaffStatus {
     private int statusCode;
     private String statusMessage;
 }
