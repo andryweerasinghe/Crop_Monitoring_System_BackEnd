@@ -5,11 +5,11 @@
 
  */
 
-package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity.impl;
+package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.impl;
 
 import jakarta.persistence.*;
-import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity.LogStaffId;
-import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity.SuperEntity;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.LogStaffId;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.SuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,20 +18,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "logStaff")
+@Table(name = "log_staff")
 public class LogStaff implements SuperEntity {
-    @EmbeddedId
-    private LogStaffId logStaffId;
+    @Id
+    private String log_staff_id;
 
     @ManyToOne
-    @MapsId("id")
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "id", referencedColumnName = "id")
     private Staff staff;
 
     @ManyToOne
-    @MapsId("logCode")
-    @JoinColumn(name = "logCode", nullable = false)
-    private MonitoringLogService log;
+    @JoinColumn(name = "log_code", referencedColumnName = "log_code")
+    private MonitoringLog monitoring_log;
 
     private String activity;
     private String comments;

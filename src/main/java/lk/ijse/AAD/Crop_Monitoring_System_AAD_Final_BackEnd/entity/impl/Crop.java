@@ -8,7 +8,7 @@
 package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.impl;
 
 import jakarta.persistence.*;
-import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity.SuperEntity;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.SuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,14 +20,17 @@ import lombok.NoArgsConstructor;
 @Table(name = "crop")
 public class Crop implements SuperEntity {
     @Id
-    private String cropCode;
-    private String commonName;
-    private String scientificName;
+    private String crop_code;
+    private String common_name;
+    private String scientific_name;
     @Column(columnDefinition = "LONGTEXT")
     private String image;
     private String category;
     private String season;
     @ManyToOne
-    @JoinColumn(name = "fieldCode", nullable = false)
+    @JoinColumn(name = "field_code", nullable = false)
     private Field field;
+    @ManyToOne
+    @JoinColumn(name = "log_crop_id", nullable = false)
+    private LogCrop log_crop;
 }

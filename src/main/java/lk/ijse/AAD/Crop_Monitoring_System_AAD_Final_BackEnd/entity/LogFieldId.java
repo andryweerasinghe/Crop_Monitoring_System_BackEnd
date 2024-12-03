@@ -5,7 +5,7 @@
 
  */
 
-package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity;
+package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@Data
+/*@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Embeddable
+@Embeddable*/
 public class LogFieldId implements Serializable {
     private String logCode;
     private String fieldCode;

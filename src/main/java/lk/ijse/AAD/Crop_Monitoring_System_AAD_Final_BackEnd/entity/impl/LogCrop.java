@@ -5,10 +5,10 @@
 
  */
 
-package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity.impl;
+package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.impl;
 
 import jakarta.persistence.*;
-import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity.SuperEntity;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.SuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,21 +17,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "logCrop")
+@Table(name = "log_crop")
 public class LogCrop implements SuperEntity {
 
-    @EmbeddedId
+    @Id
     private String log_crop_id;
+
     @ManyToOne
-    @MapsId("cropCode")
-    @JoinColumn(name = "cropCode", nullable = false)
+    @JoinColumn(name = "crop_code", referencedColumnName = "crop_code")
     private Crop crop;
 
     @ManyToOne
-    @MapsId("logCode")
-    @JoinColumn(name = "logCode", nullable = false)
-    private MonitoringLogService log;
+    @JoinColumn(name = "log_code", referencedColumnName = "log_code")
+    private MonitoringLog monitoring_log;
 
-    private String condition;
+    private String crop_condition;
     private String comments;
 }

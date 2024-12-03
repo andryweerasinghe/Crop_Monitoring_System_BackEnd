@@ -8,13 +8,14 @@
 package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.impl;
 
 import jakarta.persistence.*;
-import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity.Role;
-import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity.SuperEntity;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.Role;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.SuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,20 +25,22 @@ import java.util.Date;
 public class Staff implements SuperEntity {
     @Id
     private String id;
-    private String firstName;
-    private String secondName;
+    private String first_name;
+    private String second_name;
     private String designation;
     private String gender;
-    private Date joinedDate;
+    private Date joined_date;
     private Date dob;
-    private String addressLine1;
-    private String addressLine2;
-    private String addressLine3;
-    private String addressLine4;
-    private String addressLine5;
-    private String phoneNumber;
+    private String address_line1;
+    private String address_line2;
+    private String address_line3;
+    private String address_line4;
+    private String address_line5;
+    private String phone_number;
     private String email;
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FieldStaff> field_staff_list; // Link to associate entity
 }

@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
+@CrossOrigin("http://localhost:63342/")
 @RestController
 @RequestMapping("api/v1/crops")
 public class CropController {
@@ -112,7 +113,6 @@ public class CropController {
             e.printStackTrace();
         }
         CropDTO buildCropDTO = new CropDTO();
-        buildCropDTO.setCropCode(cropCode);
         buildCropDTO.setCommonName(commonName);
         buildCropDTO.setScientificName(scientificName);
         buildCropDTO.setImage(base64Image);

@@ -5,10 +5,10 @@
 
  */
 
-package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity.impl;
+package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.impl;
 
 import jakarta.persistence.*;
-import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity.SuperEntity;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.SuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,13 +20,10 @@ import lombok.NoArgsConstructor;
 @Table(name = "vehicle")
 public class Vehicle implements SuperEntity {
     @Id
-    private String vehicleCode;
-    private String plateNumber;
-    private String vehicleCategory;
-    private String fuelType;
+    private String vehicle_code;
+    private String plate_number;
+    private String vehicle_category;
+    private String fuel_type;
     private String status;
     private String remarks;
-    @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
-    private Staff staff;
 }

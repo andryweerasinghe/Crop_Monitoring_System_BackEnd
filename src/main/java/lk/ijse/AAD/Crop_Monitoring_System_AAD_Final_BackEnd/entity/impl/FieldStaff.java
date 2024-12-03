@@ -5,11 +5,11 @@
 
  */
 
-package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity.impl;
+package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.impl;
 
 import jakarta.persistence.*;
-import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity.FieldStaffId;
-import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity.SuperEntity;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.FieldStaffId;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.SuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,22 +18,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "fieldStaff")
+@Table(name = "field_staff")
 public class FieldStaff implements SuperEntity {
-    @EmbeddedId
-    private FieldStaffId fieldStaffId;
+    @Id
+    private FieldStaffId field_staff_id;
 
     @ManyToOne
-    @MapsId("fieldCode")
-    @JoinColumn(name = "fieldCode", nullable = false)
+    @JoinColumn(name = "field_code", nullable = false)
     private Field field;
 
     @ManyToOne
-    @MapsId("id")
     @JoinColumn(name = "id", nullable = false)
     private Staff staff;
 
-    private String hoursPerWeek;
-    private String assignedDate;
-    private String jobStatus;
+    private String hours_per_week;
+    private String assigned_date;
+    private String job_status;
 }

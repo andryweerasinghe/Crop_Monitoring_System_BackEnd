@@ -5,17 +5,17 @@
 
  */
 
-package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity;
+package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
+/*@AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Embeddable
+@Embeddable*/
 public class LogStaffId implements SuperEntity {
     private String id;
     private String logCode;

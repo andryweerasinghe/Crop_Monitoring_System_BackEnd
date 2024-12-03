@@ -7,10 +7,12 @@
 
 package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.impl;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity.Role;
-import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final.entity.SuperEntity;
+import jakarta.persistence.Id;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.Role;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.SuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +20,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Entity
 public class User implements SuperEntity {
+    @Id
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)

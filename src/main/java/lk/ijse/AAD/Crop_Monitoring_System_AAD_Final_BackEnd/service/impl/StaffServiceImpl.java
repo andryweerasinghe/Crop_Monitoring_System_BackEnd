@@ -69,18 +69,18 @@ public class StaffServiceImpl implements StaffService {
         Optional<Staff> existingMember = staffDao.findById(id);
         if (existingMember.isPresent()) {
             existingMember.get().setId(staffDTO.getId());
-            existingMember.get().setFirstName(staffDTO.getFirstName());
-            existingMember.get().setSecondName(staffDTO.getSecondName());
+            existingMember.get().setFirst_name(staffDTO.getFirstName());
+            existingMember.get().setSecond_name(staffDTO.getSecondName());
             existingMember.get().setDesignation(staffDTO.getDesignation());
             existingMember.get().setGender(staffDTO.getGender());
-            existingMember.get().setJoinedDate(staffDTO.getJoinedDate());
+            existingMember.get().setJoined_date(staffDTO.getJoinedDate());
             existingMember.get().setDob(staffDTO.getDob());
-            existingMember.get().setAddressLine1(staffDTO.getAddressLine1());
-            existingMember.get().setAddressLine2(staffDTO.getAddressLine2());
-            existingMember.get().setAddressLine3(staffDTO.getAddressLine3());
-            existingMember.get().setAddressLine4(staffDTO.getAddressLine4());
-            existingMember.get().setAddressLine5(staffDTO.getAddressLine5());
-            existingMember.get().setPhoneNumber(staffDTO.getPhoneNumber());
+            existingMember.get().setAddress_line1(staffDTO.getAddressLine1());
+            existingMember.get().setAddress_line2(staffDTO.getAddressLine2());
+            existingMember.get().setAddress_line3(staffDTO.getAddressLine3());
+            existingMember.get().setAddress_line4(staffDTO.getAddressLine4());
+            existingMember.get().setAddress_line5(staffDTO.getAddressLine5());
+            existingMember.get().setPhone_number(staffDTO.getPhoneNumber());
             existingMember.get().setEmail(staffDTO.getEmail());
         }
     }

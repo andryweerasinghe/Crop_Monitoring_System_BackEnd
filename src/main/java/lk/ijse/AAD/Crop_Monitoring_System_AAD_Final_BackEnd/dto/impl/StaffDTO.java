@@ -13,6 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,4 +33,5 @@ public class StaffDTO implements SuperDTO {
     private String addressLine5;
     private String phoneNumber;
     private String email;
+    private String fieldCode;
 }
