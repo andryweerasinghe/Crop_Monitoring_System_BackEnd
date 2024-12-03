@@ -56,12 +56,30 @@ public class CropLogServiceImpl implements CropLogService {
 
     @Override
     public List<CropLogDTO> getAllCropLogs() throws Exception {
-        return List.of();
+        // Fetch all LogCrop entities from the database
+        List<LogCrop> allCropLogs = cropLogDao.findAll();
+
+        // Map each LogCrop entity to a CropLogDTO
+        return allCropLogs.stream().map(logCrop -> {
+            CropLogDTO dto = new CropLogDTO();
+            dto.setLogCropId(logCrop.getLog_crop_id());
+            dto.setCropCondition(logCrop.getCrop_condition());
+            dto.setComments(logCrop.getComments());
+
+            // Map related MonitoringLog fields
+            MonitoringLog monitoringLog = logCrop.getMonitoring_log();
+            if (monitoringLog != null) {
+                dto.setLogCode(monitoringLog.getLog_code());
+                dto.setLogDate(monitoringLog.getLog_date());
+                dto.setImage(monitoringLog.getImage());
+            }
+            return dto;
+        }).toList();
     }
 
     @Override
     public CropLogStatus getCropLog(String logCropId) throws Exception {
-        return null;
+        LogCrop selectedCropLog = cropLogDao.getReferenceById(logCropId);
     }
 
     @Override
