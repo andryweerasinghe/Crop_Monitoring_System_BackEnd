@@ -40,6 +40,7 @@ public class CropServiceImpl implements CropService {
     }
     @Override
     public List<CropDTO> getAllCrops() throws Exception {
+        System.out.println("Get all crops");
         List<Crop> allCrops = cropDao.findAll();
         return mapping.asCropDTOList(allCrops);
     }

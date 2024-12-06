@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:63342/")
 @RestController
 @RequestMapping("api/v1/fields")
 public class FieldController {
@@ -32,14 +33,13 @@ public class FieldController {
     private FieldService fieldService;
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveField(
+            @RequestPart ("fieldCode") String fieldCode,
             @RequestPart ("fieldName") String fieldName,
             @RequestPart ("size") String size,
             @RequestPart ("fieldLocation") String fieldLocation,
             @RequestPart ("image1") MultipartFile image1,
-            @RequestPart ("image2") MultipartFile image2,
-            @RequestPart ("staffId") String staffId
+            @RequestPart ("image2") MultipartFile image2
             ){
-        String fieldCode = AppUtil.generateFieldCode();
 
         try {
             byte[] image1Bytes = image1.getBytes();
@@ -55,7 +55,6 @@ public class FieldController {
             buildFieldDTO.setFieldLocation(fieldLocation);
             buildFieldDTO.setImage1(base64Image1);
             buildFieldDTO.setImage2(base64Image2);
-            buildFieldDTO.setStaffId(staffId);
             fieldService.saveField(buildFieldDTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (DataPersistException e) {
@@ -101,7 +100,6 @@ public class FieldController {
             @RequestPart("fieldLocation") String fieldLocation,
             @RequestPart("image1") MultipartFile image1,
             @RequestPart("image2") MultipartFile image2,
-            @RequestPart("staffId") String staffId,
             @PathVariable("fieldCode") String fieldCode
     ) throws Exception {
         String base64Image1="";
@@ -120,7 +118,6 @@ public class FieldController {
         buildFieldDTO.setFieldLocation(fieldLocation);
         buildFieldDTO.setImage1(base64Image1);
         buildFieldDTO.setImage2(base64Image2);
-        buildFieldDTO.setStaffId(staffId);
         fieldService.updateField(fieldCode, buildFieldDTO);
     }
 }

@@ -24,5 +24,4 @@ public class FieldDTO implements SuperDTO {
     private String fieldLocation;
     private String image1;
     private String image2;
-    private String staffId;
 }

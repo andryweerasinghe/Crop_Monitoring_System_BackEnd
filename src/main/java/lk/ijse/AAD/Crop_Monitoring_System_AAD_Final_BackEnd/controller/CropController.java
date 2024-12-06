@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
-@CrossOrigin("http://localhost:63342/")
+@CrossOrigin(origins = "http://localhost:63342/")
 @RestController
 @RequestMapping("api/v1/crops")
 public class CropController {
@@ -35,6 +35,7 @@ public class CropController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveCrop(
+        @RequestPart ("cropCode") String cropCode,
         @RequestPart ("commonName") String commonName,
         @RequestPart ("scientificName") String scientificName,
         @RequestPart ("image") MultipartFile image,
@@ -46,8 +47,6 @@ public class CropController {
         try {
             byte[] imageBytes = image.getBytes();
             base64Image = AppUtil.imageToBase64(imageBytes);
-
-            String cropCode = AppUtil.generateCropCode();
 
             CropDTO buildCropDTO = new CropDTO();
             buildCropDTO.setCropCode(cropCode);

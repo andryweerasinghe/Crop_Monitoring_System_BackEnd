@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:63342/")
 @RestController
 @RequestMapping("api/v1/monitoringLogs")
 public class MonitoringLogController {
