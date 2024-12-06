@@ -67,10 +67,10 @@ public class VehicleServiceImpl implements VehicleService {
     public void updateVehicle(String vehicleCode, VehicleDTO vehicleDTO) throws Exception {
         Optional<Vehicle> existingVehicle = vehicleDao.findById(vehicleCode);
         if (existingVehicle.isPresent()) {
-            existingVehicle.get().setVehicle_code(vehicleDTO.getVehicleCode());
-            existingVehicle.get().setPlate_number(vehicleDTO.getPlateNumber());
-            existingVehicle.get().setVehicle_category(vehicleDTO.getVehicleCategory());
-            existingVehicle.get().setFuel_type(vehicleDTO.getFuelType());
+            existingVehicle.get().setVehicleCode(vehicleDTO.getVehicleCode());
+            existingVehicle.get().setPlateNumber(vehicleDTO.getPlateNumber());
+            existingVehicle.get().setVehicleCategory(vehicleDTO.getVehicleCategory());
+            existingVehicle.get().setFuelType(vehicleDTO.getFuelType());
             existingVehicle.get().setStatus(vehicleDTO.getStatus());
             existingVehicle.get().setRemarks(vehicleDTO.getRemarks());
         }

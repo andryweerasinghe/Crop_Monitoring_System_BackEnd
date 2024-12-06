@@ -25,22 +25,22 @@ import java.util.List;
 public class Staff implements SuperEntity {
     @Id
     private String id;
-    private String first_name;
-    private String second_name;
+    private String firstName;
+    private String secondName;
     private String designation;
     private String gender;
     private Date joined_date;
     private Date dob;
-    private String address_line1;
-    private String address_line2;
-    private String address_line3;
-    private String address_line4;
-    private String address_line5;
-    private String phone_number;
+    private String addressLine1;
+    private String addressLine2;
+    private String addressLine3;
+    private String addressLine4;
+    private String addressLine5;
+    private String phoneNumber;
     private String email;
     @Enumerated(EnumType.STRING)
     private Role role;
 
     @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FieldStaff> field_staff_list; // Link to associate entity
+    private List<FieldStaff> fieldStaffList; // Link to associate entity
 }

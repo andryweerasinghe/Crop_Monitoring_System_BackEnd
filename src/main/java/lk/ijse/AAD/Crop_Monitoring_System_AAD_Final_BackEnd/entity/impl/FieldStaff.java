@@ -21,17 +21,17 @@ import lombok.NoArgsConstructor;
 @Table(name = "field_staff")
 public class FieldStaff implements SuperEntity {
     @Id
-    private FieldStaffId field_staff_id;
+    private FieldStaffId fieldStaffId;
 
     @ManyToOne
-    @JoinColumn(name = "field_code", nullable = false)
+    @JoinColumn(name = "fieldCode", nullable = false)
     private Field field;
 
     @ManyToOne
     @JoinColumn(name = "id", nullable = false)
     private Staff staff;
 
-    private String hours_per_week;
-    private String assigned_date;
-    private String job_status;
+    private String hoursPerWeek;
+    private String assignedDate;
+    private String jobStatus;
 }

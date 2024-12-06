@@ -66,9 +66,9 @@ public class CropServiceImpl implements CropService {
     public void updateCrop(String cropCode, CropDTO cropDTO) throws Exception {
         Optional<Crop> existedCrop = cropDao.findById(cropCode);
         if (existedCrop.isPresent()) {
-            existedCrop.get().setCrop_code(cropDTO.getCropCode());
-            existedCrop.get().setCommon_name(cropDTO.getCommonName());
-            existedCrop.get().setScientific_name(cropDTO.getScientificName());
+            existedCrop.get().setCropCode(cropDTO.getCropCode());
+            existedCrop.get().setCommonName(cropDTO.getCommonName());
+            existedCrop.get().setScientificName(cropDTO.getScientificName());
             existedCrop.get().setImage(cropDTO.getImage());
             existedCrop.get().setCategory(cropDTO.getCategory());
             existedCrop.get().setSeason(cropDTO.getSeason());

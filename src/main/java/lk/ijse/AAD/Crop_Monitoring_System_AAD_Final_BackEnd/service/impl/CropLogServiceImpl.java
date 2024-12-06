@@ -40,8 +40,8 @@ public class CropLogServiceImpl implements CropLogService {
     public void saveCropLog(CropLogDTO cropLogDTO) throws Exception {
         // Create and populate MonitoringLog
         MonitoringLog monitoringLog = new MonitoringLog();
-        monitoringLog.setLog_code(cropLogDTO.getLogCode());
-        monitoringLog.setLog_date(cropLogDTO.getLogDate());
+        monitoringLog.setLogCode(cropLogDTO.getLogCode());
+        monitoringLog.setLogDate(cropLogDTO.getLogDate());
         monitoringLog.setImage(cropLogDTO.getImage());
 
         // Save MonitoringLog
@@ -49,10 +49,10 @@ public class CropLogServiceImpl implements CropLogService {
 
         // Create and populate LogCrop
         LogCrop logCrop = new LogCrop();
-        logCrop.setLog_crop_id(cropLogDTO.getLogCropId());
-        logCrop.setCrop_condition(cropLogDTO.getCropCondition());
+        logCrop.setLogCropId(cropLogDTO.getLogCropId());
+        logCrop.setCropCondition(cropLogDTO.getCropCondition());
         logCrop.setComments(cropLogDTO.getComments());
-        logCrop.setMonitoring_log(savedLog); // Establish the relationship
+        logCrop.setMonitoringLog(savedLog); // Establish the relationship
 
         // Save LogCrop
         cropLogDao.save(logCrop);
@@ -66,15 +66,15 @@ public class CropLogServiceImpl implements CropLogService {
         // Map each LogCrop entity to a CropLogDTO
         return allCropLogs.stream().map(logCrop -> {
             CropLogDTO dto = new CropLogDTO();
-            dto.setLogCropId(logCrop.getLog_crop_id());
-            dto.setCropCondition(logCrop.getCrop_condition());
+            dto.setLogCropId(logCrop.getLogCropId());
+            dto.setCropCondition(logCrop.getCropCondition());
             dto.setComments(logCrop.getComments());
 
             // Map related MonitoringLog fields
-            MonitoringLog monitoringLog = logCrop.getMonitoring_log();
+            MonitoringLog monitoringLog = logCrop.getMonitoringLog();
             if (monitoringLog != null) {
-                dto.setLogCode(monitoringLog.getLog_code());
-                dto.setLogDate(monitoringLog.getLog_date());
+                dto.setLogCode(monitoringLog.getLogCode());
+                dto.setLogDate(monitoringLog.getLogDate());
                 dto.setImage(monitoringLog.getImage());
             }
             return dto;
@@ -92,14 +92,14 @@ public class CropLogServiceImpl implements CropLogService {
         LogCrop selectedCropLog = optionalLogCrop.get();
 
         CropLogDTO dto = new CropLogDTO();
-        dto.setLogCropId(selectedCropLog.getLog_crop_id());
-        dto.setCropCondition(selectedCropLog.getCrop_condition());
+        dto.setLogCropId(selectedCropLog.getLogCropId());
+        dto.setCropCondition(selectedCropLog.getCropCondition());
         dto.setComments(selectedCropLog.getComments());
 
-        MonitoringLog monitoringLog = selectedCropLog.getMonitoring_log();
+        MonitoringLog monitoringLog = selectedCropLog.getMonitoringLog();
         if (monitoringLog != null) {
-            dto.setLogCode(monitoringLog.getLog_code());
-            dto.setLogDate(monitoringLog.getLog_date());
+            dto.setLogCode(monitoringLog.getLogCode());
+            dto.setLogDate(monitoringLog.getLogDate());
             dto.setImage(monitoringLog.getImage());
         }
 
@@ -119,7 +119,7 @@ public class CropLogServiceImpl implements CropLogService {
         LogCrop cropLog = optionalCropLog.get();
 
         // Retrieve the associated MonitoringLog (if any)
-        MonitoringLog monitoringLog = cropLog.getMonitoring_log();
+        MonitoringLog monitoringLog = cropLog.getMonitoringLog();
 
         // Delete the CropLog
         cropLogDao.delete(cropLog);
@@ -134,10 +134,10 @@ public class CropLogServiceImpl implements CropLogService {
     public void updateCropLog(String logCropId, CropLogDTO cropLogDTO) throws Exception {
         Optional<LogCrop> existingCropLog = cropLogDao.findById(logCropId);
         if (existingCropLog.isPresent()) {
-            existingCropLog.get().setLog_crop_id(cropLogDTO.getLogCropId());
-            existingCropLog.get().setCrop_condition(cropLogDTO.getCropCondition());
+            existingCropLog.get().setLogCropId(cropLogDTO.getLogCropId());
+            existingCropLog.get().setCropCondition(cropLogDTO.getCropCondition());
             existingCropLog.get().setComments(cropLogDTO.getComments());
-            MonitoringLog monitoringLog = existingCropLog.get().getMonitoring_log();
+            MonitoringLog monitoringLog = existingCropLog.get().getMonitoringLog();
 
         }
     }

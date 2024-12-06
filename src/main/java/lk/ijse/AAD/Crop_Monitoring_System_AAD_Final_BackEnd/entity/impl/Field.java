@@ -23,15 +23,15 @@ import java.util.List;
 @Table(name = "field")
 public class Field implements SuperEntity {
     @Id
-    private String field_code;
-    private String field_name;
+    private String fieldCode;
+    private String fieldName;
     private String size;
-    private String field_location;
+    private String fieldLocation;
     @Column(columnDefinition = "LONGTEXT")
     private String image1;
     @Column(columnDefinition = "LONGTEXT")
     private String image2;
-    @OneToMany(mappedBy = "field", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FieldStaff> field_staff_list;
+    @OneToMany(mappedBy = "field")
+    private List<FieldStaff> fieldStaffList;
 
 }

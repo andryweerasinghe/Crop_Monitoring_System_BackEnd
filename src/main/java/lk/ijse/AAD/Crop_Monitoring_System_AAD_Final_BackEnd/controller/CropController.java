@@ -33,7 +33,7 @@ public class CropController {
     @Autowired
     private CropService cropService;
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> saveCrop(
         @RequestPart ("cropCode") String cropCode,
         @RequestPart ("commonName") String commonName,
@@ -56,7 +56,9 @@ public class CropController {
             buildCropDTO.setCategory(category);
             buildCropDTO.setSeason(season);
             buildCropDTO.setFieldCode(fieldCode);
-            cropService.saveCrop(buildCropDTO);
+
+//            System.out.println(buildCropDTO.getSeason());
+//            cropService.saveCrop(buildCropDTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (DataPersistException e) {
             e.printStackTrace();

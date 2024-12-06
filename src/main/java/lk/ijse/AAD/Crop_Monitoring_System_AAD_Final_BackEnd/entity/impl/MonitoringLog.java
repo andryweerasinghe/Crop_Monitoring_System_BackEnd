@@ -19,17 +19,17 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "monitoring_log")
+@Table(name = "monitoringLog")
 public class MonitoringLog implements SuperEntity {
     @Id
-    private String log_code;
-    private String log_date;
+    private String logCode;
+    private String logDate;
     @Column(columnDefinition = "LONGTEXT")
     private String image;
-    @OneToMany(mappedBy = "monitoring_log")
+    @OneToMany(mappedBy = "monitoringLog")
     private List<LogField> fieldLogs;
-    @OneToMany(mappedBy = "monitoring_log")
+    @OneToMany(mappedBy = "monitoringLog")
     private List<LogCrop> cropLogs;
-    @OneToMany(mappedBy = "monitoring_log")
+    @OneToMany(mappedBy = "monitoringLog")
     private List<LogStaff> staffLogs;
 }

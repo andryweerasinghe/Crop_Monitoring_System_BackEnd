@@ -68,9 +68,9 @@ public class EquipmentServiceImpl implements EquipmentService {
     public void updateEquipment(String equipmentId, EquipmentDTO equipmentDTO) throws Exception {
         Optional<Equipment> existingEquipment = equipmentDao.findById(equipmentId);
         if (existingEquipment.isPresent()) {
-            existingEquipment.get().setEquipment_id(equipmentDTO.getEquipmentId());
-            existingEquipment.get().setEquipment_name(equipmentDTO.getEquipmentName());
-            existingEquipment.get().setEquipment_type(equipmentDTO.getEquipmentType());
+            existingEquipment.get().setEquipmentId(equipmentDTO.getEquipmentId());
+            existingEquipment.get().setEquipmentName(equipmentDTO.getEquipmentName());
+            existingEquipment.get().setEquipmentType(equipmentDTO.getEquipmentType());
             existingEquipment.get().setStatus(equipmentDTO.getStatus());
         }
     }

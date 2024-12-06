@@ -21,16 +21,16 @@ import lombok.NoArgsConstructor;
 @Table(name = "log_field")
 public class LogField implements SuperEntity {
     @Id
-    private String log_field_id;
+    private String logFieldId;
 
     @ManyToOne
-    @JoinColumn(name = "field_code", referencedColumnName = "field_code")
+    @JoinColumn(name = "fieldCode", referencedColumnName = "fieldCode")
     private Field field;
 
     @ManyToOne
-    @JoinColumn(name = "log_code", referencedColumnName = "log_code")
-    private MonitoringLog monitoring_log;
+    @JoinColumn(name = "logCode", referencedColumnName = "logCode")
+    private MonitoringLog monitoringLog;
 
-    private String date_monitored;
+    private String dateMonitored;
     private String comments;
 }

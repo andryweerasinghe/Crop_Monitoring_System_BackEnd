@@ -20,14 +20,14 @@ import lombok.NoArgsConstructor;
 @Table(name = "equipment")
 public class Equipment implements SuperEntity {
     @Id
-    private String equipment_id;
-    private String equipment_name;
-    private String equipment_type;
+    private String equipmentId;
+    private String equipmentName;
+    private String equipmentType;
     private String status;
     @ManyToOne
     @JoinColumn(name = "id", nullable = false)
-    private Staff staff_details;
+    private Staff staffDetails;
     @ManyToOne
-    @JoinColumn(name = "field_code", nullable = false)
-    private Field field_details;
+    @JoinColumn(name = "fieldCode", nullable = false)
+    private Field fieldDetails;
 }

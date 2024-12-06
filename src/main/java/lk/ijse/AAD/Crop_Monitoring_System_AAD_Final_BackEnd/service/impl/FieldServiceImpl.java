@@ -32,9 +32,11 @@ public class FieldServiceImpl implements FieldService {
     @Autowired
     private Mapping mapping;
     @Override
-    public void saveField(FieldDTO fieldDTO) throws Exception {
-        Field savedField = fieldDao.save(mapping.toField(fieldDTO));
-        if (savedField == null) {
+    public void saveField(String fieldID, String fieldName, String fieldLocation, String fieldSize, String base67FieldImg01, String base67FieldImg02) {
+        FieldDTO dto = getFieldDto(fieldID,fieldName,fieldLocation,fieldSize,base67FieldImg01,base67FieldImg02);
+
+        Field saved = fieldDao.save(mapping.toField(dto));
+        if (saved == null) {
             throw new DataPersistException("Failed to save field");
         }
     }
@@ -69,11 +71,22 @@ public class FieldServiceImpl implements FieldService {
     public void updateField(String fieldCode, FieldDTO fieldDTO) throws Exception {
         Optional<Field> existingField = fieldDao.findById(fieldCode);
         if (existingField.isPresent()) {
-            existingField.get().setField_name(fieldDTO.getFieldName());
+            existingField.get().setFieldName(fieldDTO.getFieldName());
             existingField.get().setSize(fieldDTO.getSize());
-            existingField.get().setField_location(fieldDTO.getFieldLocation());
+            existingField.get().setFieldLocation(fieldDTO.getFieldLocation());
             existingField.get().setImage1(fieldDTO.getImage1());
             existingField.get().setImage2(fieldDTO.getImage2());
         }
+    }
+
+    private FieldDTO getFieldDto(String fieldID, String fieldName, String fieldLocation, String fieldSize, String base67FieldImg01, String base67FieldImg02) {
+        FieldDTO fieldDto = new FieldDTO();
+        fieldDto.setFieldCode(fieldID);
+        fieldDto.setFieldName(fieldName);
+        fieldDto.setFieldLocation(fieldLocation);
+        fieldDto.setSize(String.valueOf(fieldSize));
+        fieldDto.setImage1(base67FieldImg01);
+        fieldDto.setImage2(base67FieldImg02);
+        return fieldDto;
     }
 }

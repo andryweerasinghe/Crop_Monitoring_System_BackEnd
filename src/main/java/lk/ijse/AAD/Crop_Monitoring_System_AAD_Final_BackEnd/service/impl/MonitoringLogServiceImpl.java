@@ -72,8 +72,8 @@ public class MonitoringLogServiceImpl implements MonitoringLogService {
     public void updateMonitoringLog(String logCode, MonitoringLogDTO monitoringLogDTO) throws Exception {
         Optional<MonitoringLog> existingMonitoringLog = monitoringLogDao.findById(logCode);
         if (existingMonitoringLog.isPresent()) {
-            existingMonitoringLog.get().setLog_code(monitoringLogDTO.getLogCode());
-            existingMonitoringLog.get().setLog_date(monitoringLogDTO.getLogDate());
+            existingMonitoringLog.get().setLogCode(monitoringLogDTO.getLogCode());
+            existingMonitoringLog.get().setLogDate(monitoringLogDTO.getLogDate());
             existingMonitoringLog.get().setImage(monitoringLogDTO.getImage());
         }
     }

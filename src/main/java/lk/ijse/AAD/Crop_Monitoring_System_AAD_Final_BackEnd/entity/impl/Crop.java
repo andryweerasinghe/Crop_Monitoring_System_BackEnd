@@ -20,15 +20,15 @@ import lombok.NoArgsConstructor;
 @Table(name = "crop")
 public class Crop implements SuperEntity {
     @Id
-    private String crop_code;
-    private String common_name;
-    private String scientific_name;
+    private String cropCode;
+    private String commonName;
+    private String scientificName;
     @Column(columnDefinition = "LONGTEXT")
     private String image;
     private String category;
     private String season;
     @ManyToOne
-    @JoinColumn(name = "field_code", nullable = false)
+    @JoinColumn(name = "fieldCode", nullable = false)
     private Field field;
     @ManyToOne
     @JoinColumn(name = "log_crop_id", nullable = false)

@@ -21,16 +21,16 @@ import lombok.NoArgsConstructor;
 public class LogCrop implements SuperEntity {
 
     @Id
-    private String log_crop_id;
+    private String logCropId;
 
     @ManyToOne
-    @JoinColumn(name = "crop_code", referencedColumnName = "crop_code")
+    @JoinColumn(name = "cropCode", referencedColumnName = "cropCode")
     private Crop crop;
 
     @ManyToOne
-    @JoinColumn(name = "log_code", referencedColumnName = "log_code")
-    private MonitoringLog monitoring_log;
+    @JoinColumn(name = "logCode", referencedColumnName = "logCode")
+    private MonitoringLog monitoringLog;
 
-    private String crop_condition;
+    private String cropCondition;
     private String comments;
 }

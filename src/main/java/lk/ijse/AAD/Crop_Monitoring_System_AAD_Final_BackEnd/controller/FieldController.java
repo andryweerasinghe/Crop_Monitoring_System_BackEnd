@@ -31,7 +31,7 @@ import java.util.List;
 public class FieldController {
     @Autowired
     private FieldService fieldService;
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveField(
             @RequestPart ("fieldCode") String fieldCode,
             @RequestPart ("fieldName") String fieldName,
@@ -48,14 +48,7 @@ public class FieldController {
             String base64Image1 = AppUtil.imageToBase64(image1Bytes);
             String base64Image2 = AppUtil.imageToBase64(image2Bytes);
 
-            FieldDTO buildFieldDTO = new FieldDTO();
-            buildFieldDTO.setFieldCode(fieldCode);
-            buildFieldDTO.setFieldName(fieldName);
-            buildFieldDTO.setSize(size);
-            buildFieldDTO.setFieldLocation(fieldLocation);
-            buildFieldDTO.setImage1(base64Image1);
-            buildFieldDTO.setImage2(base64Image2);
-            fieldService.saveField(buildFieldDTO);
+            fieldService.saveField(fieldCode, fieldName, fieldLocation, size, base64Image1, base64Image2);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (DataPersistException e) {
             e.printStackTrace();
