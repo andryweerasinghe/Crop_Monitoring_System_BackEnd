@@ -59,11 +59,8 @@ public class FieldController {
         }
     }
     @GetMapping(value = "/{fieldCode}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public FieldStatus getSelectedField(@PathVariable ("fieldCode") String fieldCode) throws Exception {
-        if (!RegexProcess.fieldCodeMatcher(fieldCode)) {
-            return new SelectedErrorStatus(1, "FieldCode is not valid");
-        }
-        return fieldService.getField(fieldCode);
+    public FieldDTO getSelectedField(@PathVariable("fieldCode") String fieldCode) throws Exception {
+        return (FieldDTO) fieldService.getField(fieldCode);
     }
     @DeleteMapping(value = "/{fieldCode}")
     public ResponseEntity<Void> deleteField(@PathVariable ("fieldCode") String fieldCode) {

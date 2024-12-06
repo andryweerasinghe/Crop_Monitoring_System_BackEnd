@@ -13,6 +13,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -23,14 +25,13 @@ public class Crop implements SuperEntity {
     private String cropCode;
     private String commonName;
     private String scientificName;
+    private String category;
     @Column(columnDefinition = "LONGTEXT")
     private String image;
-    private String category;
     private String season;
     @ManyToOne
     @JoinColumn(name = "fieldCode", nullable = false)
     private Field field;
-    @ManyToOne
-    @JoinColumn(name = "log_crop_id", nullable = false)
-    private LogCrop log_crop;
+    @OneToMany(mappedBy = "crop")
+    private List<LogCrop> logCrops;
 }

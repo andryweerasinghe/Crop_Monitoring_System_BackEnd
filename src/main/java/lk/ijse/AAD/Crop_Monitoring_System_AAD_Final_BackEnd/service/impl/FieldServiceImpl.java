@@ -50,10 +50,10 @@ public class FieldServiceImpl implements FieldService {
     @Override
     public FieldStatus getField(String fieldCode) throws Exception {
         if (fieldDao.existsById(fieldCode)) {
-            Field selectedField = fieldDao.getReferenceById(fieldCode);
-            return (FieldStatus) mapping.toFieldDTO(selectedField);
-        } else {
-            return new SelectedErrorStatus(2, "Field with id " + fieldCode + " not found");
+            Field field = fieldDao.getReferenceById(fieldCode);
+            return (FieldStatus) mapping.toFieldDTO(field);
+        }else {
+            throw new FieldNotFoundException("Field not found");
         }
     }
 

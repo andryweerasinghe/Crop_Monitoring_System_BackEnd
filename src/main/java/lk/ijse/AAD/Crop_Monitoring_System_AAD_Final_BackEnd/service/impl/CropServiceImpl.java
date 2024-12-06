@@ -7,13 +7,15 @@
 
 package lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.service.impl;
 
-import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.customStatusCodes.SelectedErrorStatus;
 import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.dao.CropDao;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.dao.FieldDao;
 import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.dto.CropStatus;
 import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.dto.impl.CropDTO;
 import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.impl.Crop;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.entity.impl.Field;
 import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.exception.CropNotFoundException;
 import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.exception.DataPersistException;
+import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.exception.FieldNotFoundException;
 import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.service.CropService;
 import lk.ijse.AAD.Crop_Monitoring_System_AAD_Final_BackEnd.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +32,14 @@ public class CropServiceImpl implements CropService {
     private CropDao cropDao;
     @Autowired
     private Mapping mapping;
+    @Autowired
+    private FieldDao fieldDao;
 
-    @Override
-    public void saveCrop(CropDTO cropDTO) throws Exception {
-        Crop savedCrop = cropDao.save(mapping.toCrop(cropDTO));
-        if (savedCrop == null) {
+    public void saveCrop(String cropCode, String commonName, String scientificName, String category, String base67FieldImg, String season, String field_code) {
+        CropDTO dto = getCropDto(cropCode,commonName,scientificName,category,season,field_code);
+
+        Crop save = cropDao.save(mapping.toCrop(dto));
+        if (save == null) {
             throw new DataPersistException("Failed to save crop");
         }
     }
@@ -47,31 +52,50 @@ public class CropServiceImpl implements CropService {
     @Override
     public CropStatus getCrop(String cropCode) throws Exception {
         if (cropDao.existsById(cropCode)) {
-            Crop selectedCrop = cropDao.getReferenceById(cropCode);
-            return (CropStatus) mapping.toCropDTO(selectedCrop);
+            Crop crop = cropDao.getReferenceById(cropCode);
+            return (CropStatus) mapping.toCropDTO(crop);
         } else {
-            return new SelectedErrorStatus(2, "Crop with code " + cropCode + " not found");
+            throw new CropNotFoundException("Crop not found");
         }
     }
     @Override
     public void deleteCrop(String cropCode) throws Exception {
         Optional<Crop> existedCrop = cropDao.findById(cropCode);
-        if (!existedCrop.isPresent()) {
+        if (existedCrop.isEmpty()) {
             throw new CropNotFoundException("Crop with code " + cropCode + " not found");
         } else {
             cropDao.deleteById(cropCode);
         }
     }
     @Override
-    public void updateCrop(String cropCode, CropDTO cropDTO) throws Exception {
-        Optional<Crop> existedCrop = cropDao.findById(cropCode);
-        if (existedCrop.isPresent()) {
-            existedCrop.get().setCropCode(cropDTO.getCropCode());
-            existedCrop.get().setCommonName(cropDTO.getCommonName());
-            existedCrop.get().setScientificName(cropDTO.getScientificName());
-            existedCrop.get().setImage(cropDTO.getImage());
-            existedCrop.get().setCategory(cropDTO.getCategory());
-            existedCrop.get().setSeason(cropDTO.getSeason());
+    public void updateCrop(String cropCode, String commonName, String scientificName, String category, String season, String fieldCode) {
+        CropDTO dto = getCropDto(cropCode, commonName, scientificName, category, season, fieldCode);
+        Optional<Crop> crop = cropDao.findById(cropCode);
+        if (crop.isPresent()) {
+            crop.get().setCommonName(dto.getCommonName());
+            crop.get().setScientificName(dto.getScientificName());
+            crop.get().setCategory(dto.getCategory());
+//            crop.get().setImage(dto.getImage());
+            crop.get().setSeason(dto.getSeason());
+
+            Optional<Field> field = fieldDao.findById(fieldCode);
+            if (field.isPresent()) {
+                crop.get().setField(field.get());
+            } else {
+                throw new FieldNotFoundException("Field not found");
+            }
+            crop.get().setCropCode(cropCode);
         }
+    }
+    private CropDTO getCropDto(String cropCode, String commonName, String scientificName, String category, String season, String field_code) {
+        CropDTO cropDto = new CropDTO();
+        cropDto.setCropCode(cropCode);
+        cropDto.setCommonName(commonName);
+        cropDto.setScientificName(scientificName);
+        cropDto.setCategory(category);
+//        cropDto.setImage(base67FieldImg);
+        cropDto.setSeason(season);
+        cropDto.setFieldCode(field_code);
+        return cropDto;
     }
 }
